@@ -27,6 +27,7 @@ export const MOCK_DEFAULT_USER_SETTINGS: ApiSettings | PostApiSettings = {
     DEFAULT_SETTINGS.REMOTE_RUNTIME_RESOURCE_FACTOR,
   provider_tokens_set: { github: null, gitlab: null, bitbucket: null },
   enable_default_condenser: DEFAULT_SETTINGS.ENABLE_DEFAULT_CONDENSER,
+  enable_reasoning: DEFAULT_SETTINGS.ENABLE_REASONING,
   enable_sound_notifications: DEFAULT_SETTINGS.ENABLE_SOUND_NOTIFICATIONS,
   enable_proactive_conversation_starters:
     DEFAULT_SETTINGS.ENABLE_PROACTIVE_CONVERSATION_STARTERS,

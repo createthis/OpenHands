@@ -98,6 +98,7 @@ function LlmSettingsScreen() {
       agent: false,
       confirmationMode: false,
       enableDefaultCondenser: false,
+      enableReasoning: false,
       securityAnalyzer: false,
     });
   };
@@ -189,6 +190,7 @@ function LlmSettingsScreen() {
       agent: false,
       confirmationMode: false,
       enableDefaultCondenser: false,
+      enableReasoning: false,
       securityAnalyzer: false,
     });
   };
@@ -506,7 +508,7 @@ function LlmSettingsScreen() {
                 defaultIsToggled={settings.ENABLE_REASONING}
                 onToggle={handleEnableReasoningIsDirty}
               >
-                {t(I18nKey.SETTINGS_FORM$ENABLE_REASONING_SWITCH_LABEL)}
+                {t(I18nKey.SETTINGS$ENABLE_REASONING)}
               </SettingsSwitch>
 
               <SettingsSwitch

@@ -311,8 +311,10 @@ class LLM(RetryMixin, DebugMixin):
                 kwargs['messages'] = messages
 
                 # add stop words if the model supports it and reasoning is not enabled
-                if (self.config.model not in MODELS_WITHOUT_STOP_WORDS 
-                    and not self.enable_reasoning):
+                if (
+                    self.config.model not in MODELS_WITHOUT_STOP_WORDS
+                    and not self.enable_reasoning
+                ):
                     kwargs['stop'] = STOP_WORDS
 
                 mock_fncall_tools = kwargs.pop('tools')

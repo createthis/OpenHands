@@ -67,6 +67,7 @@ export type ApiSettings = {
   security_analyzer: string;
   remote_runtime_resource_factor: number | null;
   enable_default_condenser: boolean;
+  enable_reasoning: boolean;
   enable_sound_notifications: boolean;
   enable_proactive_conversation_starters: boolean;
   user_consents_to_analytics: boolean | null;
