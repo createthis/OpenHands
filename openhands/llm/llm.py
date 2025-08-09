@@ -117,6 +117,8 @@ MODELS_WITHOUT_STOP_WORDS = [
     'o1',
     'o1-2024-12-17',
     'xai/grok-4-0709',
+    'deepseek-r1-0528',
+    'deepseek-r1',
 ]
 
 
@@ -132,6 +134,7 @@ class LLM(RetryMixin, DebugMixin):
         config: LLMConfig,
         metrics: Metrics | None = None,
         retry_listener: Callable[[int, int], None] | None = None,
+        enable_reasoning: bool = False,
     ) -> None:
         """Initializes the LLM. If LLMConfig is passed, its values will be the fallback.
 
@@ -140,6 +143,7 @@ class LLM(RetryMixin, DebugMixin):
         Args:
             config: The LLM configuration.
             metrics: The metrics to use.
+            enable_reasoning: Whether to enable reasoning mode (disables stop words).
         """
         self._tried_model_info = False
         self.metrics: Metrics = (
@@ -147,6 +151,7 @@ class LLM(RetryMixin, DebugMixin):
         )
         self.cost_metric_supported: bool = True
         self.config: LLMConfig = copy.deepcopy(config)
+        self.enable_reasoning: bool = enable_reasoning
 
         self.model_info: ModelInfo | None = None
         self.retry_listener = retry_listener
@@ -305,8 +310,9 @@ class LLM(RetryMixin, DebugMixin):
                 )
                 kwargs['messages'] = messages
 
-                # add stop words if the model supports it
-                if self.config.model not in MODELS_WITHOUT_STOP_WORDS:
+                # add stop words if the model supports it and reasoning is not enabled
+                if (self.config.model not in MODELS_WITHOUT_STOP_WORDS 
+                    and not self.enable_reasoning):
                     kwargs['stop'] = STOP_WORDS
 
                 mock_fncall_tools = kwargs.pop('tools')

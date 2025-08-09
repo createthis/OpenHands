@@ -41,6 +41,7 @@ export type Settings = {
   REMOTE_RUNTIME_RESOURCE_FACTOR: number | null;
   PROVIDER_TOKENS_SET: Partial<Record<Provider, string | null>>;
   ENABLE_DEFAULT_CONDENSER: boolean;
+  ENABLE_REASONING: boolean;
   ENABLE_SOUND_NOTIFICATIONS: boolean;
   ENABLE_PROACTIVE_CONVERSATION_STARTERS: boolean;
   USER_CONSENTS_TO_ANALYTICS: boolean | null;
