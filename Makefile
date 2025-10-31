@@ -291,7 +291,7 @@ docker-run:
 	else \
 		echo "$(YELLOW)Running the app in Docker $(OPTIONS)...$(RESET)"; \
 		export WORKSPACE_BASE=${WORKSPACE_BASE}; \
-		export SANDBOX_USER_ID=$(shell id -u); \
+		#export SANDBOX_USER_ID=$(shell id -u); \
 		export DATE=$(shell date +%Y%m%d%H%M%S); \
 		docker compose up $(OPTIONS); \
 	fi

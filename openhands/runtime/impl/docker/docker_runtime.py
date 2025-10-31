@@ -495,19 +495,24 @@ class DockerRuntime(ActionExecutionClient):
         self.log('info', f'Starting server with command: {command}')
 
         if self.config.sandbox.enable_gpu:
+            self.log('info', f'sandbox enable_gpu is true')
             gpu_ids = self.config.sandbox.cuda_visible_devices
             if gpu_ids is None:
+                self.log('info', f'no gpu_ids')
                 device_requests = [
                     docker.types.DeviceRequest(capabilities=[['gpu']], count=-1)
                 ]
             else:
+                device_ids=[str(i) for i in gpu_ids.split(',')]
                 device_requests = [
                     docker.types.DeviceRequest(
                         capabilities=[['gpu']],
-                        device_ids=[str(i) for i in gpu_ids.split(',')],
+                        device_ids=device_ids,
                     )
                 ]
+                self.log('info', f'gpu device_ids: {device_ids}')
         else:
+            self.log('info', f'sandbox enable_gpu is false')
             device_requests = None
         try:
             if self.runtime_container_image is None:

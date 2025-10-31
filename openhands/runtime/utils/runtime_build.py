@@ -45,6 +45,7 @@ def _generate_dockerfile(
     Returns:
     - str: The resulting Dockerfile content
     """
+    print(f'_generate_dockerfile base_image: {base_image}')
     env = Environment(
         loader=FileSystemLoader(
             searchpath=os.path.join(os.path.dirname(__file__), 'runtime_templates')
@@ -59,6 +60,7 @@ def _generate_dockerfile(
         extra_deps=extra_deps if extra_deps is not None else '',
         enable_browser=enable_browser,
     )
+    print(f'_generate_dockerfile dockerfile_content: {dockerfile_content}')
     return dockerfile_content
 
 
@@ -394,7 +396,7 @@ def _build_sandbox_image(
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--base_image', type=str, default='nikolaik/python-nodejs:python3.12-nodejs22'
+        '--base_image', type=str, default='nikolaik/python-nodejs:python3.12-nodejs22-bookworm'
     )
     parser.add_argument('--build_folder', type=str, default=None)
     parser.add_argument('--force_rebuild', action='store_true', default=False)
